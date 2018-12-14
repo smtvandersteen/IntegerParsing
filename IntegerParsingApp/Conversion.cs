@@ -27,7 +27,8 @@ namespace IntegerParsingApp
         {
             /**
              * In the future if requirements changed to need to handle a different range of input values,
-             * for example, 0 and negative values, it would be valuable to update this function to include the commented out portions
+             * for example; 0 and negative values, or larger than 999, 
+             * it would be valuable to update this function to include the commented out portions
              **/
 
             //if (number == 0)
