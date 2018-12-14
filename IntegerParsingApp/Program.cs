@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Diagnostics;
 
 namespace IntegerParsingApp
 {
     public class Program
     {
-        // Prompt for input like "6, 10" which represents the inclusive range
-        // Validate input
-
         private const int UpperBound = 999;
         private const int LowerBound = 1;
 
@@ -20,11 +17,11 @@ namespace IntegerParsingApp
             string userInput2;
             int value2 = -1;
             bool isValid = false;
-
+            var result = new Dictionary<int, int>();
 
             while (!isValid)
             {
-                Console.Write("Enter a number between 1 and 999.");
+                Console.Write("Enter a number between 1 and 999: ");
                 userInput1 = Console.ReadLine();
                 isValid = ValidateInput(userInput1);
                 if (isValid)
@@ -33,14 +30,15 @@ namespace IntegerParsingApp
             isValid = false;
             while(!isValid)
             { 
-                Console.Write("Enter a second number between 1 and 999.");
+                Console.Write("Enter a second number between 1 and 999: ");
                 userInput2 = Console.ReadLine();
                 isValid = ValidateInput(userInput2);
                 if (isValid)
                     value2 = int.Parse(userInput2);
             }
 
-            Process(value1, value2);
+            result = Process(value1, value2);
+            PrintDictionary(result);
         }
 
         private static bool ValidateInput(string input)
@@ -61,27 +59,35 @@ namespace IntegerParsingApp
             var range = new List<int>();
             string word = "";
             var numberToWord = new Dictionary<int, string>();
-            // function to take in two integers and convert integer pair into the full range - array of values returned
+            var numbersAndCounts = new Dictionary<int, int>();
+            int eCount = 0;
+
             range = Conversion.ConvertToRange(value1, value2);
 
             foreach (int value in range)
             {
-                // function to convert each of the values in an array of integers into it's string representation. 
                 word = Conversion.ConvertNumberToWord(value);
                 numberToWord.Add(value, word);
             }
 
-            throw new NotImplementedException();
+            foreach (KeyValuePair<int, string> entry in numberToWord)
+            {
+                eCount = Count(entry.Value);
+                numbersAndCounts.Add(entry.Key, eCount);
+            }
+
+            return numbersAndCounts;
         }
         
         private static int Count(string word)
         {
-            throw new NotImplementedException();
+            return word.Count(f => f == 'e');
         }
 
-        // function to take the dictionary of int and string pairs, and parse out the number of occurrences of 'e' in each string representation.
-        // Return a dictionary of int and occurrence count pairs like [6,0], [7,2], [8,1], [9,1], [10,1]
-
-        // Unit tests?
+        private static void PrintDictionary(Dictionary<int, int> numbersAndCounts)
+        {
+            foreach (KeyValuePair<int, int> entry in numbersAndCounts)
+                Debug.WriteLine("Integer: " + entry.Key + ". Number of e's in string representation: " + entry.Value);
+        }
     }
 }

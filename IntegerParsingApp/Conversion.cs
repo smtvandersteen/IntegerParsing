@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegerParsingApp
 {
@@ -28,19 +25,30 @@ namespace IntegerParsingApp
 
         public static string ConvertNumberToWord(int number)
         {
+            /**
+             * In the future if requirements changed to need to handle a different range of input values,
+             * for example, 0 and negative values, it would be valuable to update this function to include the commented out portions
+             **/
+
+            //if (number == 0)
+            //    return "zero";
+
+            //if (number < 0)
+            //    return "minus " + ConvertNumberToWord(Math.Abs(number));
+
             string word = "";
 
-            if ((number / 1000000) > 0)
-            {
-                word += ConvertNumberToWord(number / 1000000) + " million ";
-                number %= 1000000;
-            }
+            //if ((number / 1000000) > 0)
+            //{
+            //    word += ConvertNumberToWord(number / 1000000) + " million ";
+            //    number %= 1000000;
+            //}
 
-            if ((number / 1000) > 0)
-            {
-                word += ConvertNumberToWord(number / 1000) + " thousand ";
-                number %= 1000;
-            }
+            //if ((number / 1000) > 0)
+            //{
+            //    word += ConvertNumberToWord(number / 1000) + " thousand ";
+            //    number %= 1000;
+            //}
 
             if ((number / 100) > 0)
             {
